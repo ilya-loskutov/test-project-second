@@ -16,8 +16,8 @@
     <input id="house_number" [formControl]="getHouseNumberControl()" type="number">
   </p>
   <div>
-    <label for="posts">Posts</label>
-    <ul id="posts">
+    <h3>Posts</h3>
+    <ul>
       <li *ngFor="let post of getPostsControls().controls; let i = index;">
         <p>
           <label for="{{i}}-post-title">Post Title</label>

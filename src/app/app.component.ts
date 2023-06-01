@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 import { UserKeys } from './models/user';
@@ -16,8 +16,20 @@ export class AppComponent {
 
   userForm: FormGroup = UserForm.createForm();
 
+  constructor(
+    private ref: ChangeDetectorRef
+  ) { }
+
   get posts(): FormArray {
     return UserForm.getPostsFormArray(this.userForm);
+  }
+
+  ngOnInit(): void {
+    const emailControl = UserForm.getEmailControl(this.userForm);
+    emailControl.valueChanges.subscribe(() => {
+      const passwordControl = UserForm.getPasswordControl(this.userForm);
+      setTimeout(() => passwordControl.setValue('1234567890'));
+    })
   }
 
   ngAfterViewInit(): void {

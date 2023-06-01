@@ -13,7 +13,14 @@ export class UserForm {
                 city: new FormControl(['']),
                 house_number: new FormControl([0])
             }),
-            [UserKeys.posts]: new FormArray([])
+            [UserKeys.posts]: new FormArray([
+                new FormGroup(
+                    {
+                        [UserKeys.postTitle]: new FormControl('post title'),
+                        [UserKeys.postText]: new FormControl('post text')
+                    }
+                )
+            ])
         })
     }
 

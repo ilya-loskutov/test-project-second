@@ -19,4 +19,21 @@ export class AppComponent {
   get posts(): FormArray {
     return UserForm.getPostsFormArray(this.userForm);
   }
+
+  ngAfterViewInit(): void {
+    this.userForm.setValue({
+      [UserKeys.email]: 'example@example.com',
+      [UserKeys.password]: '12345',
+      [UserKeys.address]: {
+        [UserKeys.addressCity]: 'London',
+        [UserKeys.addressHouseNumber]: 3
+      },
+      [UserKeys.posts]: [
+        {
+          [UserKeys.postTitle]: 'post title 1',
+          [UserKeys.postText]: 'post text 1'
+        }
+      ]
+    });
+  }
 }

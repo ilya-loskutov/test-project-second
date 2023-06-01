@@ -17,13 +17,13 @@
   </p>
   <div>
     <h3>Posts</h3>
-    <ul formArrayName="{{UserKeys.posts}}">
+    <ul formArrayName="posts">
       <li *ngFor="let post of posts.controls; let i = index;">
-        <p formControlName="{{i}}">
+        <p formGroupName="{{i}}">
           <label for="{{i}}-post-title">Post Title</label>
           <input id="{{i}}-post-title" type="text" formControlName="{{UserKeys.postTitle}}">
         </p>
-        <p formControlName="{{i}}">
+        <p formGroupName="{{i}}">
           <label for="{{i}}-post-text">Post Text</label>
           <input id="{{i}}-post-text" type="text" formControlName="{{UserKeys.postText}}">
         </p>

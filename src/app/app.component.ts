@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, Form } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
+
+import { UserFormFactory } from './services/user-form.factory';
+import { UserKeys } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -9,37 +12,40 @@ import { FormBuilder, FormGroup, FormControl, FormArray, Form } from '@angular/f
 export class AppComponent {
   title = 'test-project-second';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(userFormFactory: UserFormFactory) {
+    this.userForm = userFormFactory.create();
+  }
 
-  userForm = this.formBuilder.group({
-    email: [''],
-    password: [''],
-    address: this.formBuilder.group({
-      city: [''],
-      house_number: [0]
-    }),
-    posts: this.formBuilder.array([])
-  });
+  userForm: FormGroup;
+
+  getEmailFormControl(): FormControl {
+    return this.userForm.get(UserKeys.email) as FormControl;
+
+  }
+
+  getPasswordFormControl(): FormControl {
+    return this.userForm.get(UserKeys.password) as FormControl;
+  }
 
   getCityControl(): FormControl {
-    return (this.userForm.get('address') as FormGroup).get('city') as FormControl;
+    return (this.userForm.get(UserKeys.address) as FormGroup).get('city') as FormControl;
   }
 
   getHouseNumberControl(): FormControl {
-    return (this.userForm.get('address') as FormGroup).get('house_number') as FormControl;
+    return (this.userForm.get(UserKeys.address) as FormGroup).get('house_number') as FormControl;
   }
 
   getPostsControls(): FormArray {
-    return this.userForm.get('posts') as FormArray;
+    return this.userForm.get(UserKeys.posts) as FormArray;
   }
 
   getPostTitleControl(index: number): FormControl {
-    const postFormControl = (this.userForm.get('posts') as FormArray).at(index);
+    const postFormControl = (this.userForm.get(UserKeys.posts) as FormArray).at(index);
     return postFormControl.get('title') as FormControl
   }
 
   getPostTextControl(index: number): FormControl {
-    const postFormControl = (this.userForm.get('posts') as FormArray).at(index);
+    const postFormControl = (this.userForm.get(UserKeys.posts) as FormArray).at(index);
     return postFormControl.get('text') as FormControl
   }
 }

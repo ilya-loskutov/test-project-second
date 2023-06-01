@@ -1,11 +1,11 @@
 <form [formGroup]="userForm">
   <p>
     <label for="email">email</label>
-    <input id="email" formControlName="email" type="email">
+    <input id="email" [formControl]="getEmailFormControl()" type="email">
   </p>
   <p>
     <label for="password">Password</label>
-    <input id="password" formControlName="password" type="password">
+    <input id="password" [formControl]="getPasswordFormControl()" type="password">
   </p>
   <p>
     <label for="city">City</label>

@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "bored-activities": {
+      "projectType": "library",
+      "root": "projects/bored-activities",
+      "sourceRoot": "projects/bored-activities/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/bored-activities/tsconfig.lib.json",
+            "project": "projects/bored-activities/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/bored-activities/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/bored-activities/src/test.ts",
+            "tsConfig": "projects/bored-activities/tsconfig.spec.json",
+            "karmaConfig": "projects/bored-activities/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/bored-activities/tsconfig.lib.json",
+              "projects/bored-activities/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "test-project-second"

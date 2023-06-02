@@ -28,7 +28,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@solit/lucidus/assets",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -91,7 +96,12 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@solit/lucidus/assets",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss"

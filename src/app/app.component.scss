@@ -1,4 +1,8 @@
-.links {
-    display: flex;
-    gap: 1em;
+.app {
+    &__links {
+        margin-top: 1em;
+
+        display: flex;
+        gap: 1em;
+    }
 }

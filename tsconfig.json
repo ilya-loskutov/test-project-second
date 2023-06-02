@@ -6,6 +6,8 @@
     "paths": {
       "bored-activities": [
         "dist/bored-activities/bored-activities",
+        "dist/bored-activities",
+        "dist/bored-activities/bored-activities",
         "dist/bored-activities"
       ]
     },

@@ -130,7 +130,7 @@
       "projectType": "library",
       "root": "projects/bored-activities",
       "sourceRoot": "projects/bored-activities/src",
-      "prefix": "lib",
+      "prefix": "ba",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",

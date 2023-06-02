@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { BoredActivity, nullBoredActivity } from './models/bored-activity';
-import { apiConfig } from './config/api';
+import { BoredActivity, nullBoredActivity } from '../projects/bored-activities/src/lib/models/bored-activity';
+import { apiConfig } from '../projects/bored-activities/src/lib/config/api';
 
 @Injectable({
   providedIn: 'root'

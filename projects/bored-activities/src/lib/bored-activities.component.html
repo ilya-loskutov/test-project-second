@@ -1,0 +1,10 @@
+<div class="bored-activities">
+    <div *ngIf="currentBoredActivity$ | async as currentActivity" class="bored-activities__current-activity">
+        <h2>Current Activity</h2>
+        <p>Activity: {{currentActivity.activity}}</p>
+        <p>Accessibility: {{currentActivity.accessibility}}</p>
+        <p>Type: {{currentActivity.type}}</p>
+        <p>Participants: {{currentActivity.participants}}</p>
+        <p>Price: {{currentActivity.price}}</p>
+    </div>
+</div>

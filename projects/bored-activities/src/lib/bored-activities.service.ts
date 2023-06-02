@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { BoredActivity, nullBoredActivity } from './models/bored-activity';
 import { apiConfig } from './config/api.config';
@@ -24,6 +25,9 @@ export class BoredActivitiesService {
   async requestNextActivity(participants: number = 1, price: number = 0): Promise<void> {
     const nextActivity: BoredActivity = await this.httpClient.get<BoredActivity>(this.formRequestUrl(participants, price))
       .toPromise();
+    if (Math.random() < 0.5) {
+      throw new Error('Data is not available');
+    }
     this._currentActivity$.next(nextActivity);
   }
 

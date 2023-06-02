@@ -1,0 +1,10 @@
+.bored-activities {
+    &__next-activity {
+        display: flex;
+        gap: 1em;
+    }
+
+    &__error {
+        color: red;
+    }
+}

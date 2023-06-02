@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { BoredActivity } from './models/bored-activity';
   styleUrls: ['./bored-activities.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoredActivitiesComponent implements OnInit {
+export class BoredActivitiesComponent {
 
   constructor(
     private boredActivitiesServices: BoredActivitiesService,
@@ -21,9 +21,6 @@ export class BoredActivitiesComponent implements OnInit {
   }
 
   public currentBoredActivity$: Observable<BoredActivity>;
-
-  public ngOnInit(): void {
-  }
 
   public async requestNextActivity(): Promise<void> {
     this.isErrorMessageShown = false;

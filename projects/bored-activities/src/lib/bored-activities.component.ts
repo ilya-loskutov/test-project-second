@@ -1,40 +1,40 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { BoredActivitiesService } from './bored-activities.service';
-import { BoredActivity } from './models/bored-activity';
+import { BoredActivity, LoadedActivity } from './models/bored-activity';
 
 @Component({
   selector: 'ba-bored-activities',
   templateUrl: './bored-activities.component.html',
   styleUrls: ['./bored-activities.component.scss'],
+  providers: [{ provide: BoredActivitiesService, useClass: BoredActivitiesService }],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoredActivitiesComponent {
 
   constructor(
-    private boredActivitiesServices: BoredActivitiesService,
+    private boredActivitiesService: BoredActivitiesService,
     private changeDetectorRef: ChangeDetectorRef
-  ) {
-    this.currentBoredActivity$ = boredActivitiesServices.currentActivity$;
+  ) { }
+
+  ngOnInit(): void {
+    this.initializeLoadedActivity();
   }
 
-  public currentBoredActivity$: Observable<BoredActivity>;
-
-  public async requestNextActivity(): Promise<void> {
-    this.isErrorMessageShown = false;
-    this.isRequestNextActivityButtonDisabled = true;
-    try {
-      await this.boredActivitiesServices.requestNextActivity();
-    }
-    catch (error) {
-      this.isErrorMessageShown = true;
-    }
-    this.isRequestNextActivityButtonDisabled = false;
-    this.changeDetectorRef.markForCheck();
+  private initializeLoadedActivity(): void {
+    this.loadedActivity$ = this.reload$.pipe(
+      switchMap(() => this.boredActivitiesService.getNextActivity())
+    );
   }
 
-  public isRequestNextActivityButtonDisabled: boolean = false;
-  public isErrorMessageShown: boolean = false;
+  public loadedActivity$!: Observable<LoadedActivity>;
+
+  private reload$: BehaviorSubject<void> = new BehaviorSubject<void>(undefined);
+
+  public requestNextActivity(): void {
+    this.reload$.next();
+  }
 }

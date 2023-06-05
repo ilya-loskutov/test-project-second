@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 
 import { BoredActivity, nullBoredActivity, LoadedActivity } from './models/bored-activity';
 import { apiConfig } from './config/api.config';
 
+@Injectable()
 export class BoredActivitiesService {
 
   constructor(
@@ -24,7 +25,7 @@ export class BoredActivitiesService {
       map((activity: BoredActivity) => new LoadedActivity(activity)),
       catchError((error: any) => of(new LoadedActivity(undefined, error))),
       startWith(new LoadedActivity())
-    )
+    );
   }
 
   private formRequestUrl(participants: number, price: number): string {

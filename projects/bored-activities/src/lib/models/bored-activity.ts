@@ -16,19 +16,19 @@ export const nullBoredActivity: BoredActivity = {
 
 export class LoadedActivity {
     constructor(activity?: BoredActivity, error?: Error) {
-        if (activity) {
-            this.activity = activity;
-        }
-        else {
-            this.error = error;
-        }
+        this.activity = activity ? activity : null;
+        this.error = error ? error : null;
     }
 
-    public readonly activity?: BoredActivity;
-    public readonly error?: Error;
+    public readonly activity: BoredActivity | null;
+    public readonly error: Error | null;
 
     public get isSuccessful(): boolean {
         return this.activity !== null;
+    }
+
+    public get isUnsuccessful(): boolean {
+        return this.error !== null;
     }
 
     public get isPending(): boolean {

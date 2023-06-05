@@ -1,16 +1,22 @@
-<div class="bored-activities">
-    <div *ngIf="currentBoredActivity$ | async as currentActivity" class="bored-activities__current-activity">
-        <h2>Current Activity</h2>
-        <p>Activity: {{currentActivity.activity}}</p>
-        <p>Accessibility: {{currentActivity.accessibility}}</p>
-        <p>Type: {{currentActivity.type}}</p>
-        <p>Participants: {{currentActivity.participants}}</p>
-        <p>Price: {{currentActivity.price}}</p>
+<div *ngIf="loadedActivity$ | async as loadedActivity" class="bored-activities">
+    <div *ngIf="loadedActivity.isSuccessful" class="bored-activities__current-activity">
+        <ng-container *ngIf="loadedActivity.activity as currentActivity">
+            <h2>Current Activity</h2>
+            <p>Activity: {{currentActivity.activity}}</p>
+            <p>Accessibility: {{currentActivity.accessibility}}</p>
+            <p>Type: {{currentActivity.type}}</p>
+            <p>Participants: {{currentActivity.participants}}</p>
+            <p>Price: {{currentActivity.price}}</p>
+        </ng-container>
     </div>
-    <form class="bored-activities__next-activity">
-        <button (click)="requestNextActivity()" [disabled]="isRequestNextActivityButtonDisabled">Next Activity!</button>
-        <div *ngIf="isErrorMessageShown" class="bored-activities__error">
-            Data is not available, please try to request it later
-        </div>
-    </form>
+    <div *ngIf="loadedActivity.isUnsuccessful" class="bored-activities__error">
+        Data is not available, please try to request it later
+        {{loadedActivity.error}}
+    </div>
+    <div *ngIf="loadedActivity.isPending" class="bored-activities__pending">
+        Please wait ...
+    </div>
+    <div class="bored-activities__next-activity">
+        <button (click)="requestNextActivity()" [disabled]="loadedActivity.isPending">Next Activity!</button>
+    </div>
 </div>

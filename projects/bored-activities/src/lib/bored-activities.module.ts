@@ -10,7 +10,7 @@ import { BoredActivitiesComponent } from './bored-activities.component';
   ],
   imports: [
     CommonModule,
-    BoredActivitiesRoutingModule
+    BoredActivitiesRoutingModule,
   ],
   exports: [
     BoredActivitiesComponent

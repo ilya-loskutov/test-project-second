@@ -4,16 +4,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoredActivitiesComponent } from 'bored-activities';
 
 import { UserComponent } from './components/user/user.component';
+import { navigationPaths } from './config/navigationPaths';
 
 const routes: Routes = [
   {
-    path: 'activities',
+    path: navigationPaths.users,
+    component: UserComponent
+  },
+  {
+    path: navigationPaths.boredActivities,
     component: BoredActivitiesComponent
   },
   {
-    path: '',
-    component: UserComponent
-  },
+    path: '**',
+    redirectTo: navigationPaths.users
+  }
 ];
 
 @NgModule({

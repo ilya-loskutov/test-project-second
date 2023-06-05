@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BoredActivitiesComponent } from 'bored-activities';
-
 import { UserComponent } from './components/user/user.component';
 import { navigationPaths } from './config/navigationPaths';
 
@@ -13,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: navigationPaths.boredActivities,
-    component: BoredActivitiesComponent
+    loadChildren: () => import('../../projects/bored-activities/src/lib/bored-activities.module')
+      .then(m => m.BoredActivitiesModule)
   },
   {
     path: '**',

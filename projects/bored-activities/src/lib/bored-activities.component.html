@@ -7,10 +7,10 @@
         <p>Participants: {{currentActivity.participants}}</p>
         <p>Price: {{currentActivity.price}}</p>
     </div>
-    <div class="bored-activities__next-activity">
+    <form class="bored-activities__next-activity">
         <button (click)="requestNextActivity()" [disabled]="isRequestNextActivityButtonDisabled">Next Activity!</button>
         <div *ngIf="isErrorMessageShown" class="bored-activities__error">
             Data is not available, please try to request it later
         </div>
-    </div>
+    </form>
 </div>
